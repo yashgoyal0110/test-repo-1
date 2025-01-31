@@ -1,0 +1,3241 @@
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Enterprise Health Report</title>
+    <style>
+        .clearfix:before,
+        .clearfix:after {
+            display: block !important;
+        }
+
+        @media print {
+            body {
+                float: none !important;
+                position: static !important;
+                display: table !important;
+                box-sizing: content-box !important;
+            }
+        }
+
+        .pageContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 20px 30px;
+            page-break-before: always;
+        }
+
+        .subElementContainer {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .frontPageElement {
+            display: flex;
+            flex-direction: column;
+            padding-top: 140px
+        }
+
+        .width100 {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            width: 780px;
+            padding: 10px 0 20px 0;
+        }
+
+        .elementHeader {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 0.4px;
+            text-align: left;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-bottom: 5px;
+            padding-top: 25px
+        }
+
+        .subElementHeader {
+            font-size: 20px;
+            font-weight: 550;
+        }
+
+        .footerText {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-size: small;
+            flex-direction: row;
+        }
+
+        .tab1 {
+            width: 100%;
+            padding: 2px;
+        }
+
+        .contentStyle {
+            padding: 50px 0 50px 80px;
+            font-size: 60px;
+            color: #0288a0;
+        }
+
+        .barStyle {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            padding-top: 40px;
+        }
+
+        .width80 {
+            width: 80%;
+        }
+
+        .width20 {
+            width: 20%;
+        }
+
+        .logoContainer {
+            margin: 40px 0px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .frontPageHeading {
+            font-size: 40px;
+            font-weight: 500;
+            padding-top: 50px;
+            color: black;
+        }
+
+        .enterpriseName {
+            font-size: 25px;
+            font-weight: 500;
+            padding-top: 50px
+        }
+
+        .t1 {
+            background-color: #dcddde;
+        }
+
+        .td1 {
+            color: #5e5d5d;
+            font-size: 16px;
+            font-weight: medium;
+            width: 500px;
+            padding: 5px;
+        }
+
+        .th1 {
+            display: flex;
+            justify-content: flex-start;
+            width: 500px;
+            font-size: 16px;
+            font-weight: normal;
+            text-align: left;
+            padding: 5px;
+        }
+
+        .tab2 {
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+
+        .paddingBottom10 {
+            padding-bottom: 10px;
+        }
+
+        .th2 {
+            color: #ffffff;
+            font-size: 14px;
+            padding: 10px;
+            width: 500px;
+        }
+
+        .td2 {
+            color: black;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 10px;
+            width: 500px;
+        }
+
+        .tr2:nth-child(odd) {
+            background-color: #cccccc;
+            color: black;
+        }
+
+        .tr2:nth-child(even) {
+            background-color: #eeeeee;
+            color: black;
+        }
+
+        .tr2Normal {
+            background-color: #cccccc;
+            color: black;
+            text-align: center;
+        }
+
+        .tr2 {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .tr2:first-child {
+            background-color: #0288a0;
+            color: #ffffff;
+        }
+
+        .contentHeader {
+            width: 100%;
+            font-size: 40px;
+            font-weight: 500;
+            color: #0288a0;
+            padding-left: 90px;
+        }
+
+        .tab3 {
+            padding: 10px 0px 20px 0px;
+            width: 100%;
+            display: flex;
+        }
+
+        .th3 {
+            background-color: #ececec;
+            font-size: 18px;
+            padding: 10px;
+            width: 690px;
+            text-align: left;
+        }
+
+        .td3 {
+            min-height: 120px;
+            background-color: #cccccc;
+            font-size: 16px;
+            padding: 10px;
+            width: 690px;
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .t3 {
+            background-color: red;
+            width: 100px;
+        }
+
+        .headerBar {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hrStyle1 {
+            border: 3px solid #0288a0;
+            height: 0px;
+            width: 100%;
+            padding-right: 20px;
+        }
+
+        .headerTitle {
+            display: flex;
+            font-size: 13px;
+            font-weight: bold;
+            justify-content: flex-end;
+        }
+
+        .listStyle1 {
+            padding: 0 0 0 10px;
+            margin: 20px 0 0 0;
+        }
+
+        .listStyle2 {
+            padding: 5px 0 5px 20px;
+        }
+
+        .mainListStyle1 {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px 30px 10px 0;
+        }
+
+        .olStyle {
+            padding: 0 10px 0px 100px;
+            font-size: 16px;
+        }
+
+        .usStyle {
+            padding: 0 0 0 80px;
+            list-style-type: square
+        }
+
+        .firstPageFooter {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            position: relative;
+            align-items: center;
+            margin-top: 25%;
+        }
+
+        .chartStyle {
+            height: 370px;
+            width: 80%;
+            margin-top: 80px;
+            display: flex;
+        }
+
+        .meterChartStyle {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            margin-Bottom: 40px;
+        }
+
+        .hrStyle2 {
+            border-width: 1px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .faqContainer {
+            display: flex;
+            margin: 10px 0px;
+        }
+
+        .questionMark {
+            color: #e65d34;
+            font-size: x-large;
+            margin-right: 20px;
+            font-weight: bolder;
+        }
+
+        .faqs {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .question {
+            font-size: medium;
+            font-weight: bold;
+            padding-bottom: 5px;
+        }
+
+        .answer {
+            text-align: justify;
+        }
+
+        .faqGlossaryMainContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 20px 40px;
+            page-break-before: always;
+        }
+
+        .glossaries {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            padding-bottom: 10px;
+        }
+
+        .list {
+            padding-right: 10px;
+            font-size: medium;
+            font-weight: 500;
+            color: #7a7979;
+        }
+
+        .terms {
+            flex: 4;
+            font-size: medium;
+            font-weight: 600;
+            padding-right: 20px;
+            color: #646464;
+        }
+
+        .definitions {
+            flex: 10;
+            font-size: medium;
+            font-weight: 500;
+            color: #7a7979;
+            text-align: justify;
+        }
+
+        /* -----------------------------------------------------------------v2 styles--------------------------------------------------------------------------------------*/
+
+        body {
+            position: relative;
+            width: 21cm;
+            height: 29.7cm;
+            margin: 0 auto;
+            font-family: sans-serif;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            float: none !important;
+            overflow: visible !important;
+        }
+
+        .initialPageContainer {
+            background-image: url("../public/images/EHR_BG.png");
+            background-size: 100%;
+            width: 21cm;
+            height: 29.7cm;
+            page-break-before: always;
+        }
+
+        .paddingLeft70 {
+            padding-left: 70px;
+            height: 27.5cm;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .paddingLeft50 {
+            padding-left: 50px;
+            height: 27.5cm;
+        }
+
+        .firstPageLogoContainer {
+            display: flex;
+            align-items: center;
+            padding-bottom: 30px;
+            padding-top: 200px;
+            width: 100%;
+        }
+
+        .logoDivider {
+            width: 0px;
+            height: 18.4px;
+            left: 156px;
+            top: 193px;
+
+            border: 1px solid #B3BAC5;
+
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .logoHr {
+            border: 0.6px solid #B3BAC5;
+            width: 300px;
+        }
+
+        .headers {
+            display: flex;
+            flex-direction: column;
+            margin-top: 120px;
+            margin-bottom: 50px;
+        }
+
+        .enterpriseHealth {
+            font-family: 'Futura', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 26px;
+            line-height: 32px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #091E42;
+
+        }
+
+        .report {
+            font-family: 'Futura', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 60px;
+            /* identical to box height, or 122% */
+
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+
+            color: #091E42;
+        }
+
+        .financialYear {
+            font-family: 'Futura', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 32px;
+            /* identical to box height, or 133% */
+
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+
+            color: #091E42;
+        }
+
+        .distributorDetailsHr {
+            border: 0.6px solid #B3BAC5;
+            width: 400px;
+        }
+
+        .marginForContactIcon {
+            margin-top: 80px;
+        }
+
+        .contactIconContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 48px;
+            height: 48px;
+            left: 48px;
+            top: 566px;
+
+            background: #B84242;
+            border: 0.4px solid #B3BAC5;
+            border-radius: 50%;
+        }
+
+        .contactIcon {
+            left: 9.75%;
+            right: 85.55%;
+            top: 68.76%;
+            bottom: 28.5%;
+
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 23px;
+            text-align: center;
+
+            color: rgba(255, 255, 255, 0.87);
+        }
+
+        .distributorBasicDetails {
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+
+        .outletName {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            /* identical to box height */
+            color: #091E42;
+        }
+
+        .ownerName {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            /* identical to box height, or 133% */
+            color: #091e42a8;
+        }
+
+        .distributorDetails {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+            min-height: 120px;
+        }
+
+        .distributorInfo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-top: 10px;
+            text-transform: capitalize;
+        }
+
+        .info {
+            width: 180px;
+            height: 14px;
+            left: 66px;
+            top: 683px;
+
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 12px;
+            color: #000000ab;
+            text-transform: capitalize;
+        }
+
+        .icon {
+            padding-right: 10px;
+            width: 10px;
+            height: 10px;
+        }
+
+        .footerContainer {
+            padding-top: 20px;
+        }
+
+        .footerDate {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            /* identical to box height, or 167% */
+            color: #000000;
+        }
+
+        .contentContainer {
+            padding-top: 420px;
+            padding-bottom: 40px;
+        }
+
+        .contentStyle1 {
+            width: 230px;
+            height: 48px;
+            left: 32px;
+            top: 300px;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 34px;
+            line-height: 43px;
+            text-transform: uppercase;
+
+            color: #091E42;
+        }
+
+        .contentListContainer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            width: 60%;
+        }
+
+        .containerListStyle {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 8px;
+        }
+
+        .contentHeaderStyle {
+            display: flex;
+            flex-direction: row;
+            padding: 0px;
+            gap: 8px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            text-decoration: none;
+            color: #091E42;
+        }
+
+        .contentPageStyle {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 20px;
+            /* identical to box height */
+
+            text-align: right;
+
+            color: rgba(44, 16, 7, 0.66);
+        }
+
+        .contentArrowStyle {
+            font-size: large;
+            text-decoration: none;
+            color: rgba(44, 16, 7, 0.66);
+        }
+
+        .splitPageContainer {
+            display: flex;
+            flex-direction: row;
+            page-break-before: always;
+        }
+
+        .leftSplit {
+            flex: 1;
+            background-color: #ffffff;
+            height: 29.7cm;
+        }
+
+        .rightSplit {
+            flex: 1;
+            background: linear-gradient(90deg, #FEF8F6 0%, #FEFBFA 8.87%);
+            height: 29.7cm;
+        }
+
+        .ehrHeaderContainer {
+            display: flex;
+            align-items: center;
+            padding-top: 50px;
+        }
+
+        .headerCompanyName {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 10px;
+            line-height: 16px;
+            /* identical to box height, or 160% */
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+        .ehrHeader {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 16px;
+            /* identical to box height, or 160% */
+
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .ehrHeaderSeparator {
+            width: 12px;
+            height: 0px;
+            left: 119px;
+            top: 38px;
+
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            transform: rotate(90deg);
+        }
+
+        .headerActyvLogo {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 70px;
+            padding-top: 40px;
+        }
+
+        .headerActyvLogo>img {
+            height: 32px;
+            width: 32px;
+        }
+
+        .mainTitleContainer {
+            width: 230px;
+            height: 90px;
+            left: 32px;
+            top: 160px;
+
+            margin-top: 200px;
+        }
+
+        .mainTitleContainer1 {
+            width: 230px;
+            height: 90px;
+            left: 32px;
+            top: 160px;
+
+            margin-top: 50px;
+        }
+
+        .mainTitle {
+            width: 230px;
+            height: 68px;
+            left: 32px;
+            top: 160px;
+
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 34px;
+            /* or 121% */
+
+            color: #091E42;
+        }
+
+        .mainTitleUnderline {
+            width: 48px;
+            height: 0px;
+            left: 32px;
+            top: 250px;
+            margin-top: 10px;
+            border: 8px solid #091E42;
+        }
+
+        .contactContainerBriefSnapshot {
+            display: flex;
+            align-items: center;
+
+            margin-top: 150px;
+            margin-bottom: 100px;
+
+            width: 300px;
+            min-height: 80px;
+            max-height: 150px;
+            left: 32px;
+            top: 320px;
+
+            background: #F8F9FB;
+            border-radius: 2px;
+        }
+
+        .contactLogoContainerBriefSnapshot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .distributorBasicDetailsContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .distributorBasicDetailsBriefSnapshot {
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+        }
+
+        .outletNameBriefSnapshot {
+            left: 17.48%;
+            right: 61.68%;
+            top: 40.38%;
+            bottom: 56.89%;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 23px;
+            /* identical to box height */
+
+            color: #091E42;
+            word-break: break-word;
+        }
+
+        .ownerNameBriefSnapshot {
+            left: 17.48%;
+            right: 69.41%;
+            top: 43.35%;
+            bottom: 54.75%;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            /* identical to box height, or 133% */
+
+            color: rgba(9, 30, 66, 0.66);
+        }
+
+        .distributorDetailsInfo {
+            width: 200px;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 15px;
+
+            color: rgba(0, 0, 0, 0.67);
+        }
+
+        .addressSplit {
+            border: 0.6px solid #B3BAC5;
+            width: 228px;
+            margin: 20px 0 0;
+        }
+
+        .gstinDetailsContainer {
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            width: 164px;
+            height: 64px;
+            left: 52px;
+            top: 636px;
+        }
+
+        .gstinLogoContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .activeGstinContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gstinActiveStyle {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 12px;
+            /* identical to box height */
+
+            color: #091E42;
+        }
+
+        .gstinStyle {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            /* identical to box height */
+            color: #091E42;
+            text-align: center;
+            padding-top: 5px;
+        }
+
+        .gstRegistrationDateStyle {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 16px;
+            /* identical to box height, or 160% */
+            text-align: center;
+            letter-spacing: 0.4px;
+
+            color: rgba(9, 30, 66, 0.66);
+        }
+
+        .tableTitleContainer {
+            display: flex;
+            align-items: center;
+
+            background: #091E42;
+            border-radius: 2px;
+            width: 305px;
+            height: 28px;
+            left: 334px;
+            top: 160px;
+            word-break: break-word;
+        }
+
+        .companyFirmStyle {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 10px;
+            line-height: 13px;
+            text-transform: uppercase;
+
+            color: #FFFFFF;
+        }
+
+        .tableIconStyle {
+            padding: 0 15px;
+        }
+
+        .tableStyle {
+            width: 305px;
+            border-collapse: collapse;
+        }
+
+        .tableRowStyle {
+            word-break: break-word;
+            text-align: center;
+            border-bottom: 0.6px solid #B3BAC5;
+        }
+
+        .tableDataStyle1 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 15px;
+            max-width: 100px;
+            text-align: left;
+
+            color: rgba(9, 30, 66, 0.66);
+
+            word-break: break-word;
+        }
+
+        .tableDataStyle2 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 10px;
+            line-height: 15px;
+            text-align: center;
+            color: rgba(9, 30, 66, 0.66);
+            padding: 5px 0;
+        }
+
+        .pageNumberContainer {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 70px;
+            align-items: center;
+            height: 20px;
+        }
+
+        .pageNumberStyle {
+            text-align: right;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 12px;
+            /* identical to box height */
+            color: #091E42;
+        }
+
+        .lineGraphDescriptionContainer {
+            display: flex;
+            margin-top: 100px;
+            flex-direction: column;
+        }
+
+        .lineContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding-bottom: 10px;
+        }
+
+        .actualRevenueTextContainer {
+            width: 22px;
+            height: 0px;
+            left: 32px;
+            top: 335px;
+
+            border: 2px solid #091E42;
+        }
+
+        .gstTrendTextContainer {
+            width: 22px;
+            height: 0px;
+            left: 32px;
+            top: 335px;
+            border: 2px dashed #DA5125;
+        }
+
+        .lineGraphText {
+            height: 14px;
+            left: 58px;
+            top: 328px;
+            padding-left: 20px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 13px;
+
+            color: rgba(9, 30, 66, 0.66);
+        }
+
+        .lineChartStyle {
+            margin-top: 120px;
+            /* width: 300px !important; */
+            clear: both;
+        }
+
+        .customerSupplierContainer {
+            display: flex;
+            flex-direction: row;
+            width: 300px;
+        }
+
+        .customerSupplierDataContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 5px 0 0;
+            width: 200px;
+        }
+
+        .customerSupplierData {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 3.5px;
+            border-bottom: 0.6px solid #B3BAC5;
+        }
+
+        .ellipse1 {
+            width: 8px;
+            height: 8px;
+            background: #091E42;
+            border-radius: 50%;
+        }
+
+        .ellipse2 {
+            width: 8px;
+            height: 8px;
+            background: #143b7e;
+            ;
+            border-radius: 50%;
+        }
+
+        .ellipse3 {
+            width: 8px;
+            height: 8px;
+            background: #1b4fa9;
+            border-radius: 50%;
+        }
+
+        .ellipse4 {
+            width: 8px;
+            height: 8px;
+            background: #2264d6;
+            border-radius: 50%;
+        }
+
+        .ellipse5 {
+            width: 8px;
+            height: 8px;
+            background: #2776ff;
+            border-radius: 50%;
+        }
+
+        .ellipse6 {
+            width: 8px;
+            height: 8px;
+            background: #3a82ff;
+            border-radius: 50%;
+        }
+
+        .ellipse7 {
+            width: 8px;
+            height: 8px;
+            background: #498af9;
+            border-radius: 50%;
+        }
+
+        .ellipse8 {
+            width: 8px;
+            height: 8px;
+            background: #5b97ff;
+            border-radius: 50%;
+        }
+
+        .ellipse9 {
+            width: 8px;
+            height: 8px;
+            background: #74a7ff;
+            border-radius: 50%;
+        }
+
+        .ellipse10 {
+            width: 8px;
+            height: 8px;
+            background: #90b8ff;
+            border-radius: 50%;
+        }
+
+        .percentageValueStyle {
+            height: 13px;
+            left: 460px;
+            top: 312px;
+
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 9px;
+            line-height: 12px;
+            /* identical to box height */
+            padding-right: 10px;
+            padding-left: 5px;
+            color: #091E42;
+        }
+
+        .customerNameStyle {
+            left: 485px;
+            top: 312px;
+
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 9px;
+            line-height: 11px;
+            /* identical to box height */
+            text-transform: uppercase;
+            color: rgba(9, 30, 66, 0.66);
+        }
+
+        .iconContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 28px;
+            height: 28px;
+            background: #091E42;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        .sectionTitle {
+            width: 230px;
+            height: 66px;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 33px;
+            /* or 138% */
+
+            color: #091E42;
+        }
+
+        .scoreCardContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            width: 230px;
+            height: 38px;
+            margin-top: 80px;
+            background: #F8F9FB;
+            border-radius: 2px;
+        }
+
+        .sectionScoreStyle {
+            left: 8.24%;
+            right: 89.24%;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 18px;
+            text-align: center;
+
+            color: #091E42;
+        }
+
+        .overallScoreStyle {
+            left: 11.26%;
+            right: 86.22%;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 8px;
+            line-height: 10px;
+
+            color: rgba(66, 82, 110, 0.66);
+        }
+
+        .separatorForSectionScore {
+            width: 16px;
+            height: 0px;
+
+            border: 0.6px solid #B3BAC5;
+            transform: rotate(-90deg);
+        }
+
+        .scoreDescriptionText {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 15px;
+            /* identical to box height */
+
+            text-transform: uppercase;
+            padding-right: 10px;
+            color: #091E42;
+        }
+
+        .rowContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .sectionDividerLine {
+            width: 228px;
+            height: 0px;
+            left: 32px;
+            top: 354px;
+
+            border: 0.6px solid #B3BAC5;
+        }
+
+        .sectionTextStyle {
+            width: 228px;
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 20px;
+            /* or 167% */
+            color: #091e42a8;
+        }
+
+        .descriptorTextStyle {
+            width: 181px;
+            height: 20px;
+
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            /* identical to box height, or 167% */
+
+            font-feature-settings: 'cpsp' on;
+
+            color: rgba(9, 30, 66, 0.66);
+        }
+
+        .tableSubtitleText {
+            height: 14px;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 10px;
+            line-height: 13px;
+            text-transform: uppercase;
+
+            color: rgba(44, 16, 7, 0.66);
+        }
+
+        .tableDataStyle3 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 15px;
+            text-align: left;
+            margin: 20px 0 0;
+            padding-bottom: 20px;
+            color: rgba(9, 30, 66, 0.66);
+            border-bottom: 0.6px solid #B3BAC5;
+            word-break: break-word;
+            width: 300px;
+        }
+
+        .descriptoryText {
+            height: 12px;
+            left: 342px;
+            top: 462px;
+
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 8px;
+            line-height: 12px;
+            /* identical to box height, or 150% */
+
+            letter-spacing: 0.04em;
+            text-transform: capitalize;
+
+            color: rgba(9, 30, 66, 0.66);
+        }
+
+        .scoringRangeContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 10px 0;
+            width: 250px;
+        }
+
+        .excellentEllipse {
+            width: 8px;
+            height: 8px;
+            background: #00875A;
+            border-radius: 50%;
+        }
+
+        .veryGoodEllipse {
+            width: 8px;
+            height: 8px;
+            background: #5BCCA3;
+            border-radius: 50%;
+        }
+
+        .goodEllipse {
+            width: 8px;
+            height: 8px;
+            background: #FF991F;
+            border-radius: 50%;
+        }
+
+        .cautiousEllipse {
+            width: 8px;
+            height: 8px;
+            background: #F56C49;
+            border-radius: 50%;
+        }
+
+        .highRiskEllipse {
+            width: 8px;
+            height: 8px;
+            background: #DE350B;
+            border-radius: 50%;
+        }
+
+        .scoreContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F4F5F7;
+            border-radius: 2px;
+            width: 250px;
+            height: 200px;
+            margin: 20px 0 40px;
+        }
+
+        .stable {
+            color: '#00875A';
+            width: 12px;
+            height: 12px;
+            margin-right: 10px;
+            background: #008466;
+            border-radius: 4px;
+        }
+
+        .moderate {
+            color: '#5BCCA3';
+            width: 12px;
+            height: 12px;
+            margin-right: 10px;
+            background: #5BCCA3;
+            border-radius: 4px;
+        }
+
+        .cautious {
+            color: '#FF991F';
+            width: 12px;
+            height: 12px;
+            margin-right: 10px;
+            background: #FF991F;
+            border-radius: 4px;
+        }
+
+        .highrisk {
+            color: '#00875A';
+            width: 12px;
+            height: 12px;
+            margin-right: 10px;
+            background: #DE350B;
+            border-radius: 4px;
+        }
+
+        .scoreText {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 23px;
+            text-align: center;
+
+            color: #091E42;
+        }
+
+        .sectionScoreMainContainer {
+            display: flex;
+            align-items: center;
+            width: 300px;
+        }
+
+        .halfSectionContainer {
+            flex: 1;
+            flex-direction: column;
+        }
+
+        .subScoreContainer {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F4F5F7;
+            border-radius: 2px;
+            height: 160px;
+            text-align: center;
+            border: 0.6px solid rgba(179, 186, 197, 0.2);
+        }
+
+        .sectionNameStyle {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 15px;
+            /* or 150% */
+
+            text-align: center;
+            text-transform: uppercase;
+            width: 85px;
+            color: #42526ea8;
+        }
+
+        .scoringRationaleArrow {
+            height: 16px;
+
+            /* Other / Clickable */
+
+            background: rgba(255, 255, 255, 0.0001);
+            text-decoration: none;
+            color: #aeb0b4a8;
+        }
+
+        .questionsTitle {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 23px;
+            /* identical to box height */
+            color: #091E42;
+        }
+
+        .questionAnswerContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 280px;
+            background: #FEFBFA;
+            padding: 10px;
+        }
+
+        .questionText {
+            width: 240px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            color: #091E42;
+            margin: 10px 0;
+        }
+
+        .answerText {
+            width: 220px;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 18px;
+            color: rgba(9, 30, 66, 0.66);
+            padding: 0 0 5px !important;
+            position: static;
+        }
+
+        .answerList {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gstFilingContainer {
+            display: flex;
+            flex-direction: column;
+            background: #F4F5F7;
+            border-radius: 2px;
+            width: 230px;
+            min-height: 274px;
+            padding-left: 20px;
+        }
+
+        .gstDataNotAvailable {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            color: #091E42;
+            padding: 20px 0 30px;
+            text-align: center;
+        }
+
+        .gstAnalysisSeparator {
+            width: 190px;
+            height: 0px;
+            border-bottom: 0.6px solid #B3BAC5;
+        }
+
+        .filingTimeContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .filingTimeText {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 12px;
+            /* identical to box height */
+            color: #091E42;
+            padding-left: 5px;
+        }
+
+        .gstr3bFilingText {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+
+            color: #091E42;
+            padding: 20px 0 30px;
+        }
+
+        .filingPeriodAndMonthsContainer {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filingPeriodText {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 9px;
+            /* identical to box height, or 90% */
+
+            text-transform: capitalize;
+            padding-left: 5px;
+            color: rgba(9, 30, 66, 0.66);
+        }
+
+        .filingMonthsText {
+            font-family: 'Roboto', sans-serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 15px;
+            /* identical to box height, or 150% */
+            color: rgba(9, 30, 66, 0.66);
+            margin-bottom: 5px;
+            width: 200px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</head>
+
+<body>
+    <div class="initialPageContainer" id="homeScreen">
+        <div class="paddingLeft70">
+            <div class="firstPageLogoContainer"><img
+                    src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                    alt="succesship-logo" height="100px" width="100px"></div>
+            <hr class="logoHr" align="left">
+            <div class="headers"><span class="enterpriseHealth">ENTERPRISE HEALTH</span><span
+                    class="report">REPORT</span><span class="financialYear">FY 2022-23</span></div>
+            <hr class="distributorDetailsHr" align="left">
+            <div class="marginForContactIcon">
+                <div class="contactIconContainer"><span class="contactIcon">Su</span></div>
+            </div>
+            <div class="distributorBasicDetails"><span class="outletName">Sumit Enterprises</span><span
+                    class="ownerName">JAI KUMAR AGGARWAL</span></div>
+            <hr class="logoHr" align="left">
+            <div class="distributorDetails">
+                <div class="distributorInfo">
+                    <image class="icon" src="../public/images/phone.svg" alt="phone"></image><span
+                        class="info">9419194403</span>
+                </div>
+                <div class="distributorInfo">
+                    <image class="icon"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVEll8uICS2xqheOz2l1Vh1DcvpEyxgVrNfw&amp;s"
+                        alt="mail"></image><span class="info"
+                        style="text-transform: lowercase !important;">Jai12121@gmail.com</span>
+                </div>
+                <div class="distributorInfo">
+                    <image class="icon"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAApVBMVEX///8HZv/5+/8AZP/y9//8/f/e6//R4v/q8f/I3v84fP8AXP+dwv95rP8AWv9qo/9Ph/+Csv/c5/+8z/9upv8icv+Ouf9yqP/A1/8AYf+tzf/l7v9dnP8AX//v9f/0+f+10f+myP+81f+Xv/+Jtv8AV/+gu/8Rav8ndf9XjP+Ytv+Dp/9rmP/K2f+Hq//S4P9gkv+sxP90nv+1yv80ev9smf8AT/+zW5LMAAAH+klEQVR4nO3daWOiSBAGYAFR4oFIvAg2JqN4ZTQmk5n//9O2q4FoDkyDXSDZej/vYJ6t7mpsDms1CoVCoVAoFAqFQqFQKBQKhUKhUCgUCoVCoVAoFAqFQqFQKJWMf7t8/L1xLs3m9+Py1i8b8ynucmOENmOeZ1waz2PMDo3N0i0bdUywHdrM09TGY/ZwG5RNE3EPITMU86IYLDyUX8jGJlRdvdN44aZRqs98RPVFxscSgTuNIfsgTNuVBdyHOPPvY4xwX4pPd9qF+CBtRy8eGAyLGKFJ2LDwhcPSsFvM+3iaVSww0IqZgscYWqFV1IfFVhDiDYuci06RczAJc4rimbV9cV30NO09/+xCgLuwFKCmhbtCiKZeeJdJYmh6AUKz9ljGJIzCHvGLaJquXRpQ02zXRCby42+KXyiO8TY1ZKJpPpXVZqKET7hCU68dyiwhL+KhhtltTFP3yy0hL6KvI1bR1M1teY00CtuaeEXkJTSHZa2FSYyhiVdEU581y1wqotjNGVYRTV2flT5IYZjOdCQiL+HMKXuQ8mHqzJCKyGdh3SofyIlWHWcm8hIGN+VPQz4RbwKUIkIJg2d1XwwNw2OMtdttJq7nZPiX7ecApYhQQmuvpNEYrG2zofN3v10+Pz8vt/uXzeuqbcte3WF7C6WIXGhZL5efshksHD7+cT/tuczc2+1hJVNL78WycIR1y7/4pNQL18szVz91mVngHXzoNcqBJh+k/oWLhWcfmmc/ZSYjNByfD1PlExGmod9oXSS0ne+uBsoJWw0fYSLCIG1cJDTaf779FFlhA2GYCqF7gZCtJbblJYUujjC4SCi3nSsvDNQL+TR0m7mFkvvVksKmyyeiYqF5mdAYyn1MJqFaIqz3fjO3sC15B5CssOkrX/NB2Gje5BTaz5IfIym8aTYQhPX8QqMl+zEZhKqb6UXC8PyJTPWF3kb6YyoqtOVvh6mmUHalqK6QbX+6MMxw610lhcbqW1bjaTfZ7XZPbsOX2SW5NqH3cu64wXKjhaEdJ5Tayrs2YfvM+Uzw125n3xe5NqGd/r1+0s61dXdtQpZ6J9Mk56XIKxOmr4b1vHuvVyb0Ur/6vvwUYVorneW+XH5lQpZ2A3P+SyDXJlymHPF37u3zKxOmLof5bwi4NmHKNrCZ/wrItQlvvz5gkP9aa0WEjR8vvOAORxKSkIQk/N8J7R8ptE/yL034z/4cuZPx8oXMqgfHpHzFN4PPqcvd23kFwtxPYN1KFbHKQrmbyqoslHuUo8rClQywykLJb1QVFu5+vHApt79YYaHk3asVFr7KnRNWV6hLboJXVyh7Ml5d4R/JXfDqCmUfBKiu0JHcJK6uUPbbdWWFluzltsoKJc/ZKiyUPGe7CqHrn2T29QH1hv8+lvTzOOUL3+9EpVxd+7wTJX257QqE77Q/cjfxND9/R5iEJCQhCUn4UZj9KVkMoYMozP6kM4LQOyAKsz+tjiF8QRT2M98TiiBkfTzhpJP5lkkEYbszwRPeZX7dnnqhod0hCu8zLxcIwtY9pvBv1lajXuj9RRWOsrYa9UI2QhKK54DvH+Qu02IKVw/3OM8Bw7PcXJh1zVcu9A4gRHiWWzyPz4VZh6lyIRtxIcLz+NE7FW5+PXQydlPVQqPVefh1g/BOBRBaXHjX6WYromoh63buuNBCEMZLfmcueaUWR2i8zjsoC/5xuXiYZyuiYiHrzh9QFou4mUKrmY8yfUlUKzSc0Vw0GoRXYYm3KImJOOpn+ZsU17A/EtMQ4y1Kx4k4WkwzjFOlQjZdjLCm4cmaP1/0Za/WKhZ6Tn8xx1nvY+HbMO3LP5alUGgM+5iDNHr1ZdRNF/2x9OmpQuFqLEoYD1KMV0OeFLHbK0HY66KWMH41ZFJEaaI6IQcmJUQSJktiVMRuT+otjqqExqrXfSshSp+JhUkROXE8kPqdEjVCbzgYcyByCU9nIozT8bgl8WJVFULDa43HMEZRZ2EsFLumME4F8fD91psCoaEdBFCMUWikeML4BZgwTsVUHI9735bxYiEvYI8DYRKKMYpZwnhN5OM0nop8Lo6n6/PGC4WGt57yT+nGkxDaDNKLoBOiaDYwFRPiYHDeeJEQfPwTYiBMQsw2EwnjfhoT+4I46DmrVGR+oeGtnN7gHTDuo7g/cPGJyI3875g6a038BunHvzP1fpr0+/TEb5Fqa2cqjgxNpkCgeLl+HbpNRFyIfjPowf/r3vTgtF7Xw/dZPVv+F7F2q2FK1q8t5zAVR+wNRI9ZJEA/qGO9Uv9LIu+oooxRHXuC+Tm96df58j8+/itxOOHjBeRdtDigGKcRcSKIi8Qo/iplGSS+hQBOIiD+GD0lwqJxd2IUypRyfE04Ezjcm+8OlonigAmRLxowUhMjR0ZMJYGD9d98fITCMlEYUBCho4qRyhsOGAVSKJWkL3jg4y1GjFDoooUBT4guGEUdAcnTVxJ+IM6L6jeBAhYNrL2N1KPxocOV4FQQOFAHynf0FThCT4i8jLFRILkSnAoCB7oTvNhXeAFjIvzuTGAJIyC58p47FYQf59cEeMLHBygUsHBgLS5jXRgByZWcqSQ3oOM84auXUsBTI4xVQDZcYKqJy3WCB/Urz5cYoZAcCeefDTWBE1fgQfnK9UVGgQQlMNUEXiExi3hl+0QiJFdyp4rAgfTr4YmYUXRViY9XNutjTJUpG0OhUCgUCoVCoVAoFAqFQqFQKBQKhULJnv8AlRpTkgJS6M8AAAAASUVORK5CYII="
+                        alt="location"></image><span class="info">na</span>
+                </div>
+            </div>
+            <hr class="logoHr" align="left">
+            <div class="footerContainer"><span class="footerDate">Report Date: 31 Jan, 2025</span></div>
+        </div>
+    </div>
+    <div class="initialPageContainer">
+        <div class="paddingLeft70">
+            <div class="contentContainer"><span class="contentStyle1">CONTENT</span></div>
+            <div class="contentListContainer">
+                <div class="containerListStyle"><a class="contentArrowStyle" href="#briefSnapshotOfOrganization"><span
+                            class="contentHeaderStyle">Brief Snapshot of the Organization</span></a><span
+                        class="contentArrowStyle">............................</span></div><span
+                    class="contentPageStyle">01</span>
+            </div>
+            <div class="contentListContainer">
+                <div class="containerListStyle"><a class="contentArrowStyle"
+                        href="#operatingPerformanceKeyIndicators"><span class="contentHeaderStyle">Operating Performance
+                            Key Indicators</span></a><span class="contentArrowStyle">......................</span></div>
+                <span class="contentPageStyle">02</span>
+            </div>
+            <div class="contentListContainer">
+                <div class="containerListStyle"><a class="contentArrowStyle" href="#gstAnalysis"><span
+                            class="contentHeaderStyle">GST Analysis</span></a><span
+                        class="contentArrowStyle">............................................................</span>
+                </div><span class="contentPageStyle">03</span>
+            </div>
+            <div class="contentListContainer">
+                <div class="containerListStyle"><a class="contentArrowStyle" href="#scoringRationale"><span
+                            class="contentHeaderStyle">Scoring Rationale</span></a><span
+                        class="contentArrowStyle">.....................................................</span></div>
+                <span class="contentPageStyle">04</span>
+            </div>
+            <div class="contentListContainer">
+                <div class="containerListStyle"><a class="contentArrowStyle" href="#faq"><span
+                            class="contentHeaderStyle">FAQs</span></a><span
+                        class="contentArrowStyle">........................................................................</span>
+                </div><span class="contentPageStyle">10</span>
+            </div>
+            <div class="contentListContainer">
+                <div class="containerListStyle"><a class="contentArrowStyle" href="#glossary"><span
+                            class="contentHeaderStyle">Glossary</span></a><span
+                        class="contentArrowStyle">...................................................................</span>
+                </div><span class="contentPageStyle">11</span>
+            </div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="briefSnapshotOfOrganization">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Brief Snapshot of the Organization</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div class="contactContainerBriefSnapshot">
+                    <div class="contactLogoContainerBriefSnapshot">
+                        <div class="contactIconContainer"><span class="contactIcon">Su</span></div>
+                    </div>
+                    <div class="distributorBasicDetailsContainer">
+                        <div class="distributorBasicDetailsBriefSnapshot"><span class="outletNameBriefSnapshot">Sumit
+                                Enterprises</span><span class="ownerNameBriefSnapshot">JAI KUMAR AGGARWAL</span></div>
+                    </div>
+                </div>
+                <div class="distributorDetails">
+                    <div class="distributorInfo">
+                        <image class="icon" src="../public/images/phone.svg" alt="phone"></image><span
+                            class="distributorDetailsInfo">9419194403</span>
+                    </div>
+                    <div class="distributorInfo">
+                        <image class="icon" src="../public/images/mail.svg" alt="mail"></image><span
+                            class="distributorDetailsInfo"
+                            style="text-transform: lowercase !important;">Jai12121@gmail.com</span>
+                    </div>
+                    <div class="distributorInfo">
+                        <image class="icon" src="../public/images/location.svg" alt="location"></image><span
+                            class="distributorDetailsInfo">na</span>
+                    </div>
+                </div>
+                <hr class="addressSplit" align="left">
+                <div class="gstinDetailsContainer">
+                    <div class="gstinLogoContainer"><img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVEll8uICS2xqheOz2l1Vh1DcvpEyxgVrNfw&amp;s"
+                            alt="gstin" width="34px" height="21px">
+                        <div class="activeGstinContainer"><img
+                                src="/Users/yashagrawal/Desktop/succesship/actyv-ehr-report/public/images/rightMark.jpg"
+                                alt="Active" width="10px" height="10px"><span class="gstinActiveStyle">NA</span></div>
+                    </div><span class="gstinStyle">NA</span><span class="gstRegistrationDateStyle">GST Reg Date -
+                        -</span>
+                </div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/firm.png" alt="succesship-logo" height="15px" width="15px"><span
+                        class="companyFirmStyle">About Company/Firm</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Organization Type</td>
+                        <td class="tableDataStyle2">Firm/Limited Liability Partnership</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1" style="float: left;">Annual Turnover (FY 2022-23)</td>
+                        <td class="tableDataStyle2">₹13,70,34,133</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Nature of Business</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                </table>
+                <div class="tableTitleContainer" style="margin-top: 30px;"><img class="tableIconStyle"
+                        src="../public/images/suitcaseIcon.png" alt="succesship-logo" height="15px" width="15px"><span
+                        class="companyFirmStyle">Business Details</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Legal Name</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Trade Name</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">CIN</td>
+                        <td class="tableDataStyle2"></td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">PAN</td>
+                        <td class="tableDataStyle2">ABJFS5369N</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">01</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="operatingPerformanceKeyIndicators">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Operating Performance Key Indicators</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div class="lineGraphDescriptionContainer">
+                    <div class="lineContainer">
+                        <div class="actualRevenueTextContainer"></div><span class="lineGraphText">Actual Revenue</span>
+                    </div>
+                    <div class="lineContainer">
+                        <div class="gstTrendTextContainer"></div><span class="lineGraphText">GST Trend</span>
+                    </div>
+                </div>
+                <div style="clear: both; width: 250px; height: 300px; margin-top: 100px;"><canvas
+                        id="gstTrendGraph"></canvas></div>
+                <script type="text/javascript">let graphData = [{ "score": "83.82", "label": "Assets/Liabilities" }, { "score": "49.28", "label": "Net Taxable Income" }, { "score": "23.01", "label": "EBITDA" }, { "score": "49.79", "label": "Profit after Tax" }, { "score": "21.44", "label": "Return on capital employed" }, { "score": "27.32", "label": "Return on networth" }]
+                    let gstTrendGraphData = { "labels": ["FY 2022", "FY 2023", "FY 2024"], "revenueData": [95347031, 137034133], "gstTrendData": [95347031, 137034133, 126194894.19] }
+                    let clientName = "ACTYVGO"</script>
+                <script src="../public/javascripts/lineGraph.js"></script>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/financialElementsIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">FINANCIAL ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Assets/Liabilities</td>
+                        <td class="tableDataStyle2">₹1,45,56,721</td>
+                        <td class="tableDataStyle2">₹2,67,58,761</td>
+                        <td class="tableDataStyle2">83.82%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Net Taxable Income</td>
+                        <td class="tableDataStyle2">₹11,33,310</td>
+                        <td class="tableDataStyle2">₹16,91,750</td>
+                        <td class="tableDataStyle2">49.28%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">EBITDA</td>
+                        <td class="tableDataStyle2">₹26,94,181</td>
+                        <td class="tableDataStyle2">₹33,14,025</td>
+                        <td class="tableDataStyle2">23.01%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Profit after Tax</td>
+                        <td class="tableDataStyle2">₹11,26,038</td>
+                        <td class="tableDataStyle2">₹16,86,688</td>
+                        <td class="tableDataStyle2">49.79%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Return on capital employed</td>
+                        <td class="tableDataStyle2">17.96%</td>
+                        <td class="tableDataStyle2">21.81%</td>
+                        <td class="tableDataStyle2">21.44%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Return on networth</td>
+                        <td class="tableDataStyle2">11.97%</td>
+                        <td class="tableDataStyle2">15.24%</td>
+                        <td class="tableDataStyle2">27.32%</td>
+                    </tr>
+                </table>
+                <div class="tableTitleContainer" style="margin-top: 30px;"><img class="tableIconStyle"
+                        src="../public/images/bankingIcon.svg" alt="succesship-logo" height="15px" width="15px"><span
+                        class="companyFirmStyle">BANKING ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"></td>
+                        <td class="tableDataStyle2">2022-23</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Banking to Turnover</td>
+                        <td class="tableDataStyle2">0.97</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Banking to GST</td>
+                        <td class="tableDataStyle2">1.05</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Debt to Equity ratio</td>
+                        <td class="tableDataStyle2">0.31</td>
+                    </tr>
+                </table>
+                <div class="tableTitleContainer" style="margin-top: 30px;"><img class="tableIconStyle"
+                        src="../public/images/growthGraphIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">Y-ON-Y GROWTH</span></div>
+                <div style="clear: both; padding-top: 10px;"><canvas id="operatingPerformanceKeyIndicatorsYGrowthGraph"
+                        width="300px" height="280px"></canvas></div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">02</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="gstAnalysis">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer1"><span class="mainTitle">GST Analysis</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div class="gstFilingContainer"><span class="gstr3bFilingText">GST-3B Filing</span>
+                    <div class="filingTimeContainer" style="margin-bottom: 20px;">
+                        <image src="../public/images/rightMark.jpg" alt="home" height="12px" width="12px"></image><span
+                            class="filingTimeText">On Time</span>
+                    </div>
+                    <div class="filingPeriodAndMonthsContainer">
+                        <div class="filingTimeContainer">
+                            <image src="../public/images/calendarIcon.svg" alt="home" height="12px" width="12px">
+                            </image><span class="filingPeriodText">2022-23</span>
+                        </div><span class="filingMonthsText">January, February, March</span>
+                        <div class="filingTimeContainer">
+                            <image src="../public/images/calendarIcon.svg" alt="home" height="12px" width="12px">
+                            </image><span class="filingPeriodText">2023-24</span>
+                        </div><span class="filingMonthsText">December, January, February, April, May, June, July,
+                            August, September, October, November, March</span>
+                        <div class="filingTimeContainer">
+                            <image src="../public/images/calendarIcon.svg" alt="home" height="12px" width="12px">
+                            </image><span class="filingPeriodText">2024-25</span>
+                        </div><span class="filingMonthsText">April, May, June</span>
+                    </div>
+                    <div class="gstAnalysisSeparator"></div>
+                    <div class="filingTimeContainer" style="margin: 20px 0 10px;">
+                        <image src="../public/images/checkCircle.svg" alt="home" height="12px" width="12px"></image>
+                        <span class="filingTimeText">Delayed</span>
+                    </div>
+                    <div class="filingPeriodAndMonthsContainer"></div>
+                </div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <script type="text/javascript">let top5Suppliers = [] || []
+                    let supplierRevenueData = [] || []
+                    let top5Consumers = [] || []
+                    let customerRevenueData = [] || []</script>
+                <script src="../public/javascripts/lineGraph.js"></script>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">03</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="scoringRationale">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Scoring Rationale</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div class="scoreContainer">
+                    <div style="position: relative; top: 50%;"><span class="scoreText">0</span></div><canvas
+                        id="actyvScore" width="130px" height="130px"></canvas>
+                    <script type="text/javascript">let scoreData = { "score": 0, "color": "#DE350B" }</script>
+                    <script src="../public/javascripts/lineGraph.js"></script>
+                    <div class="rowContainer">
+                        <div class="highrisk"></div><span class="scoreText">High Risk</span>
+                    </div>
+                </div>
+                <div class="tableTitleContainer" style="margin-top: 10px; width: 250px !important;"><img
+                        class="tableIconStyle" src="../public/images/paintIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">SCORING RANGE</span></div>
+                <div class="scoringRangeContainer">
+                    <div class="customerSupplierData">
+                        <div class="excellentEllipse"></div><span class="percentageValueStyle">> 80</span><span
+                            class="customerNameStyle">Excellent</span>
+                    </div>
+                    <div class="customerSupplierData">
+                        <div class="veryGoodEllipse"></div><span class="percentageValueStyle">66-80</span><span
+                            class="customerNameStyle">Very Good</span>
+                    </div>
+                    <div class="customerSupplierData">
+                        <div class="goodEllipse"></div><span class="percentageValueStyle">51-65</span><span
+                            class="customerNameStyle">Good</span>
+                    </div>
+                    <div class="customerSupplierData">
+                        <div class="cautiousEllipse"></div><span class="percentageValueStyle">41-50</span><span
+                            class="customerNameStyle">Cautious</span>
+                    </div>
+                    <div class="customerSupplierData">
+                        <div class="highRiskEllipse"></div><span class="percentageValueStyle">
+                            < 40</span><span class="customerNameStyle">High Risk</span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <p class="sectionTextStyle" style="margin: 210px 0 50px;">Success Score is derived based on a
+                    Comprehensive Assessment of Historical Data, Current Data and future Growth possibilities.</p>
+                <div class="sectionScoreMainContainer">
+                    <div class="halfSectionContainer">
+                        <div class="subScoreContainer">
+                            <div style="position: relative; top: 42%;"><span>0</span></div><canvas
+                                id="financialManagementGraph1" width="80px" height="80px"></canvas><a
+                                class="scoringRationaleArrow" href="#financialManagement"><span
+                                    class="sectionNameStyle">Financial Management</span></a>
+                        </div>
+                        <div class="subScoreContainer">
+                            <div style="position: relative; top: 42%;"><span>0</span></div><canvas
+                                id="accessToFinanceGraph1" width="80px" height="80px"></canvas><a
+                                class="scoringRationaleArrow" href="#accessToFinance"><span
+                                    class="sectionNameStyle">Access To Finance</span></a>
+                        </div>
+                        <div class="subScoreContainer">
+                            <div style="position: relative; top: 42%;"><span>0</span></div><canvas
+                                id="survivalAndStabilityGraph1" width="80px" height="80px"></canvas><a
+                                class="scoringRationaleArrow" href="#stabilityAndSurvival"><span
+                                    class="sectionNameStyle">Stability and Survival</span></a>
+                        </div>
+                    </div>
+                    <div class="halfSectionContainer">
+                        <div class="subScoreContainer">
+                            <div style="position: relative; top: 42%;"><span>0</span></div><canvas
+                                id="financialStandingGraph1" width="80px" height="80px"></canvas><a
+                                class="scoringRationaleArrow" href="#financialStanding"><span
+                                    class="sectionNameStyle">Financial Standing</span></a>
+                        </div>
+                        <div class="subScoreContainer">
+                            <div style="position: relative; top: 42%;"><span>0</span></div><canvas
+                                id="insuranceRiskGraph1" width="80px" height="80px"></canvas><a
+                                class="scoringRationaleArrow" href="#insuranceRiskManagement"><span
+                                    class="sectionNameStyle">Insurance Risk Management</span></a>
+                        </div>
+                        <div class="subScoreContainer">
+                            <div style="position: relative; top: 42%;"><span>0</span></div><canvas
+                                id="revenuePotentialGraph1" width="80px" height="80px"></canvas><a
+                                class="scoringRationaleArrow" href="#revenuePotential"><span
+                                    class="sectionNameStyle">Revenue potential</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">04</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="financialManagement">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer">
+                    <div class="iconContainer"><img src="../public/images/rupeeIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Financial Management</span>
+                </div>
+                <div class="scoreCardContainer">
+                    <div class="rowContainer"><span class="sectionScoreStyle">0</span><span
+                            class="overallScoreStyle">/100</span>
+                        <div class="separatorForSectionScore"></div><span class="scoreDescriptionText">High
+                            Risk</span><canvas class="paddingBottom10" id="financialManagementGraph2" width="40px"
+                            height="40px"></canvas>
+                        <script
+                            type="text/javascript">let financialManagementGraphData = { "elementName1": "financialManagementGraph1", "elementName2": "financialManagementGraph2", "score": 0, "statusLabel": "High Risk", "color": "#DE350B" }</script>
+                        <script src="../public/javascripts/lineGraph.js"></script>
+                    </div>
+                </div>
+                <div class="sectionDividerLine" style="margin: 100px 0 30px;"></div>
+                <p class="sectionTextStyle">Financial management refers to the strategic planning, organising, directing
+                    & controlling of financial parameters resulting in the growth of an organization.</p>
+                <p class="sectionTextStyle">It is about applying the management principles to the financial assets that
+                    empower the organisation to deal in times of adversity.</p>
+                <div class="sectionDividerLine" style="margin-top: 30px;"></div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/growthGraphIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">Y-ON-Y GROWTH</span></div>
+                <div style="clear: both;"><canvas id="financialManagementGraph" width="300px" height="550px"></canvas>
+                </div>
+                <script
+                    type="text/javascript">let financialManagementYonYGraphData = [{ "score": "49.79", "label": "Net Profit/(Loss)" }, { "score": "79.99", "label": "Account Receivables" }, { "score": "2.31", "label": "Interest Cost" }, { "score": "9.63", "label": "Expense to Turnover ratio" }, { "score": "-69.85", "label": "Current ratio" }, { "score": "-71.76", "label": "Quick ratio" }, { "score": "20.21", "label": "Interest Coverage Ratio" }, { "score": "9.63", "label": "Gross Margin" }, { "score": "4.24", "label": "Net Profit Margin" }, { "score": "25.23", "label": "Debtor Days" }, { "score": "51.72", "label": "Inventory Days" }, { "score": "4331.52", "label": "Creditor Days" }]</script>
+                <script src="../public/javascripts/lineGraph.js"></script>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">05</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div style="margin-top:100px;">
+                    <div class="iconContainer"><img src="../public/images/rupeeIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Financial Management</span>
+                </div>
+                <div class="tableTitleContainer" style="margin-top: 30px;"><img class="tableIconStyle"
+                        src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
+                        alt="succesship-logo" height="15px" width="15px"><span class="companyFirmStyle">FINANCIAL
+                        ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Net Profit/(Loss)</td>
+                        <td class="tableDataStyle2">₹11,26,038</td>
+                        <td class="tableDataStyle2">₹16,86,688</td>
+                        <td class="tableDataStyle2">49.79%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Account Receivables</td>
+                        <td class="tableDataStyle2">₹60,44,557</td>
+                        <td class="tableDataStyle2">₹1,08,79,483</td>
+                        <td class="tableDataStyle2">79.99%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Interest Cost</td>
+                        <td class="tableDataStyle2">₹14,32,914</td>
+                        <td class="tableDataStyle2">₹14,66,064</td>
+                        <td class="tableDataStyle2">2.31%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Expense to Turnover ratio</td>
+                        <td class="tableDataStyle2">13.29%</td>
+                        <td class="tableDataStyle2">14.57%</td>
+                        <td class="tableDataStyle2">9.63%</td>
+                    </tr>
+                </table>
+                <table class="tableStyle">
+                    <div class="tableDataStyle3" style="display: flex; align-items: center;"><img class="icon"
+                            src="../public/images/moneyBagIcon.svg" alt="succesship-logo" height="15px"
+                            width="15px"><span class="tableSubtitleText">LIQUIDITY RATIOS</span></div>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Current ratio</td>
+                        <td class="tableDataStyle2">6.60</td>
+                        <td class="tableDataStyle2">1.99</td>
+                        <td class="tableDataStyle2">-69.85%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Quick ratio</td>
+                        <td class="tableDataStyle2">3.47</td>
+                        <td class="tableDataStyle2">0.98</td>
+                        <td class="tableDataStyle2">-71.76%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Interest Coverage Ratio</td>
+                        <td class="tableDataStyle2">1.88</td>
+                        <td class="tableDataStyle2">2.26</td>
+                        <td class="tableDataStyle2">20.21%</td>
+                    </tr>
+                </table>
+                <table class="tableStyle">
+                    <div class="tableDataStyle3" style="display: flex; align-items: center;"><img class="icon"
+                            src="../public/images/percentageIcon.svg" alt="succesship-logo" height="15px"
+                            width="15px"><span class="tableSubtitleText">PROFITABILITY RATIO</span></div>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Gross Margin</td>
+                        <td class="tableDataStyle2">13.29%</td>
+                        <td class="tableDataStyle2">14.57%</td>
+                        <td class="tableDataStyle2">9.63%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Net Profit Margin</td>
+                        <td class="tableDataStyle2">1.18%</td>
+                        <td class="tableDataStyle2">1.23%</td>
+                        <td class="tableDataStyle2">4.24%</td>
+                    </tr>
+                </table>
+                <table class="tableStyle">
+                    <div class="tableDataStyle3" style="display: flex; align-items: center;"><img class="icon"
+                            src="../public/images/downwardArrow.svg" alt="succesship-logo" height="10px"
+                            width="10px"><span class="tableSubtitleText">WORKING CAPITAL DAYS</span></div>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Debtor Days</td>
+                        <td class="tableDataStyle2">23</td>
+                        <td class="tableDataStyle2">29</td>
+                        <td class="tableDataStyle2">25.23%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Inventory Days</td>
+                        <td class="tableDataStyle2">29</td>
+                        <td class="tableDataStyle2">44</td>
+                        <td class="tableDataStyle2">51.72%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Creditor Days</td>
+                        <td class="tableDataStyle2">1</td>
+                        <td class="tableDataStyle2">41</td>
+                        <td class="tableDataStyle2">4331.52%</td>
+                    </tr>
+                </table>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <table class="tableStyle">
+                    <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                            src="../public/images/bankingIcon.svg" alt="succesship-logo" height="15px"
+                            width="15px"><span class="companyFirmStyle">BANKING ELEMENTS</span></div>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">No of Inward Bounces in last 6 month</td>
+                        <td class="tableDataStyle2">0</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">No of Outward Bounces in last 6 month</td>
+                        <td class="tableDataStyle2">0</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">No of Inward Bounces due to insufficient funds in the last 6
+                            month(s)</td>
+                        <td class="tableDataStyle2">0</td>
+                    </tr>
+                </table>
+                <table class="tableStyle">
+                    <div class="tableTitleContainer" style="margin-top: 100px;"><img class="tableIconStyle"
+                            src="../public/images/flagIcon.svg" alt="succesship-logo" height="15px" width="15px"><span
+                            class="companyFirmStyle">GST PAYMENT DELAYS</span></div>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2022-23</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">GST Payment *</td>
+                        <td class="tableDataStyle2">0</td>
+                    </tr>
+                </table><span class="descriptoryText">* Number of times - Delay in tax payments</span>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">06</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="financialStanding">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer">
+                    <div class="iconContainer"><img src="../public/images/balanceIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Financial Standing</span>
+                </div>
+                <div class="scoreCardContainer">
+                    <div class="rowContainer"><span class="sectionScoreStyle">0</span><span
+                            class="overallScoreStyle">/100</span>
+                        <div class="separatorForSectionScore"></div><span class="scoreDescriptionText">High
+                            Risk</span><canvas class="paddingBottom10" id="financialStandingGraph2" width="40px"
+                            height="40px"></canvas>
+                        <script
+                            type="text/javascript">let financialStandingGraphData = { "elementName1": "financialStandingGraph1", "elementName2": "financialStandingGraph2", "score": 0, "statusLabel": "High Risk", "color": "#DE350B" }</script>
+                        <script src="../public/javascripts/lineGraph.js"></script>
+                    </div>
+                </div>
+                <div class="sectionDividerLine" style="margin: 100px 0 30px;"></div>
+                <p class="sectionTextStyle">Financial standing refers to a business organisation's scale, financial
+                    resources and insurance.</p>
+                <p class="sectionTextStyle">A critical assessment of the financial resources will determine the key
+                    financial ratios that are sacrosanct for any organisation to grow sustainably.</p>
+                <div class="sectionDividerLine" style="margin-top: 30px;"></div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/growthGraphIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">Y-ON-Y GROWTH</span></div>
+                <div style="clear: both;"><canvas id="financialStandingGraph" width="300px" height="550px"></canvas>
+                </div>
+                <script
+                    type="text/javascript">let financialStandingYonYGraphData = [{ "score": "43.72", "label": "Total Revenue" }, { "score": "23.01", "label": "EBITDA" }, { "score": "23.20", "label": "PBIT" }, { "score": "-14.49", "label": "EBITDA margin" }, { "score": "-14.18", "label": "PBIT margin" }, { "score": "-32.35", "label": "Debt to capital employed" }]</script>
+                <script src="../public/javascripts/lineGraph.js"></script>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">07</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div style="margin-top:100px;">
+                    <div class="iconContainer"><img src="../public/images/balanceIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Financial Standing</span>
+                </div>
+                <div class="tableTitleContainer" style="margin-top: 30px;"><img class="tableIconStyle"
+                        src="../public/images/financialElementsIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">FINANCIAL ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Total Revenue</td>
+                        <td class="tableDataStyle2">₹9,53,47,031</td>
+                        <td class="tableDataStyle2">₹13,70,34,133</td>
+                        <td class="tableDataStyle2">43.72%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">EBITDA</td>
+                        <td class="tableDataStyle2">₹26,94,181</td>
+                        <td class="tableDataStyle2">₹33,14,025</td>
+                        <td class="tableDataStyle2">23.01%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">PBIT</td>
+                        <td class="tableDataStyle2">₹25,58,952</td>
+                        <td class="tableDataStyle2">₹31,52,752</td>
+                        <td class="tableDataStyle2">23.20%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">EBITDA margin</td>
+                        <td class="tableDataStyle2">2.83%</td>
+                        <td class="tableDataStyle2">2.42%</td>
+                        <td class="tableDataStyle2">-14.49%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">PBIT margin</td>
+                        <td class="tableDataStyle2">2.68%</td>
+                        <td class="tableDataStyle2">2.30%</td>
+                        <td class="tableDataStyle2">-14.18%</td>
+                    </tr>
+                </table>
+                <table class="tableStyle">
+                    <div class="tableDataStyle3" style="display: flex; align-items: center;"><img class="icon"
+                            src="../public/images/percentageIcon.svg" alt="succesship-logo" height="15px"
+                            width="15px"><span class="tableSubtitleText">LEVERAGE RATIO</span></div>
+                    <table class="tableStyle">
+                        <tr class="tableRowStyle">
+                            <td class="tableDataStyle2"> </td>
+                            <td class="tableDataStyle2">2021-22</td>
+                            <td class="tableDataStyle2">2022-23</td>
+                            <td class="tableDataStyle2">Growth</td>
+                        </tr>
+                        <tr class="tableRowStyle">
+                            <td class="tableDataStyle1">Debt to capital employed</td>
+                            <td class="tableDataStyle2">0.34</td>
+                            <td class="tableDataStyle2">0.23</td>
+                            <td class="tableDataStyle2">-32.35%</td>
+                        </tr>
+                    </table>
+                </table>
+                <table class="tableStyle">
+                    <div class="tableDataStyle3" style="display: flex; align-items: center;"><img class="icon"
+                            src="../public/images/downwardArrow.svg" alt="succesship-logo" height="10px"
+                            width="10px"><span class="tableSubtitleText">ITR FILING</span></div>
+                    <table class="tableStyle">
+                        <tr class="tableRowStyle">
+                            <td class="tableDataStyle1">ITR filing delay</td>
+                            <td class="tableDataStyle2">No</td>
+                        </tr>
+                    </table>
+                </table>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/bankingIcon.svg" alt="succesship-logo" height="15px" width="15px"><span
+                        class="companyFirmStyle">BANKING/GST ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2022-23</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">EMI bounces</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">GST Trend(last 12 months)</td>
+                        <td class="tableDataStyle2">₹12,61,94,895</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">OD/CC utilization % in last 6 months</td>
+                        <td class="tableDataStyle2">92.45%</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">08</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="accessToFinance">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer">
+                    <div class="iconContainer"><img src="../public/images/keyIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Access To Finance</span>
+                </div>
+                <div class="scoreCardContainer">
+                    <div class="rowContainer"><span class="sectionScoreStyle">0</span><span
+                            class="overallScoreStyle">/100</span>
+                        <div class="separatorForSectionScore"></div><span class="scoreDescriptionText">High
+                            Risk</span><canvas class="paddingBottom10" id="accessToFinanceGraph2" width="40px"
+                            height="40px"></canvas>
+                        <script
+                            type="text/javascript">let accessToFinanceGraphData = { "elementName1": "accessToFinanceGraph1", "elementName2": "accessToFinanceGraph2", "score": 0, "statusLabel": "High Risk", "color": "#DE350B" }</script>
+                        <script src="../public/javascripts/lineGraph.js"></script>
+                    </div>
+                </div>
+                <div class="sectionDividerLine" style="margin: 100px 0 30px;"></div>
+                <p class="sectionTextStyle">Access to finance is the ability of Individuals or Enterprises to obtain
+                    financial services such as Credit/Loans, Insurance etc.</p>
+                <p class="sectionTextStyle">An Organisation that has good Financial Management principles with matching
+                    Financial Standing is most likely to have access to quality financial services and products.</p>
+                <div class="sectionDividerLine" style="margin-top: 30px;"></div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/financialElementsIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">FINANCIAL ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Total secured/unsecured loans</td>
+                        <td class="tableDataStyle2">₹48,39,893</td>
+                        <td class="tableDataStyle2">₹33,86,081</td>
+                        <td class="tableDataStyle2">-30.04%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Total secured loans</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Total unsecured loans</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">DSCR</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Estimated loan eligibility</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">₹17,21,270</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                </table>
+                <div class="tableTitleContainer" style="margin-top: 100px;"><img class="tableIconStyle"
+                        src="../public/images/financialElementsIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">BUREAU ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Bureau score *</td>
+                        <td class="tableDataStyle2">851</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Total Loan Outstanding +</td>
+                        <td class="tableDataStyle2">₹4,05,24,984</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Written off/Settled loans</td>
+                        <td class="tableDataStyle2">0</td>
+                    </tr>
+                </table>
+                <div class="distributorBasicDetails"><span class="descriptoryText">* Sufficient history not available (
+                        <=15)< /span><span class="descriptoryText">+ As per bureau report</span></div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">09</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="insuranceRiskManagement">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer">
+                    <div class="iconContainer"><img src="../public/images/keyIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Insurance Risk Management</span>
+                </div>
+                <div class="scoreCardContainer">
+                    <div class="rowContainer"><span class="sectionScoreStyle">0</span><span
+                            class="overallScoreStyle">/100</span>
+                        <div class="separatorForSectionScore"></div><span class="scoreDescriptionText">High
+                            Risk</span><canvas class="paddingBottom10" id="insuranceRiskGraph2" width="40px"
+                            height="40px"></canvas>
+                        <script
+                            type="text/javascript">let insuranceRiskGraphData = { "elementName1": "insuranceRiskGraph1", "elementName2": "insuranceRiskGraph2", "score": 0, "statusLabel": "High Risk", "color": "#DE350B" }</script>
+                        <script src="../public/javascripts/lineGraph.js"></script>
+                    </div>
+                </div>
+                <div class="sectionDividerLine" style="margin: 100px 0 30px;"></div>
+                <p class="sectionTextStyle">Insurance Risk Management is the assessment & quantification of the likely
+                    financial impact of events that may occur and thereby mitigate the impact with adequate Insurance
+                    covers.</p>
+                <p class="sectionTextStyle">For Eg: Fire and Burglary, Natural Calamities covers etc.</p>
+                <div class="sectionDividerLine" style="margin-top: 30px;"></div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/financialElementsIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">INSURANCE ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Key man insurance</td>
+                        <td class="tableDataStyle2">Yes</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Property insurance</td>
+                        <td class="tableDataStyle2">Yes</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Fire &amp; Burglary insurance</td>
+                        <td class="tableDataStyle2">Yes</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Vehicle insurance</td>
+                        <td class="tableDataStyle2">Yes</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Plant &amp; Machinery insurance</td>
+                        <td class="tableDataStyle2">No</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Goods in transit insurance</td>
+                        <td class="tableDataStyle2">Yes</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">10</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="stabilityAndSurvival">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer">
+                    <div class="iconContainer"><img src="../public/images/keyIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Stability and Survival</span>
+                </div>
+                <div class="scoreCardContainer">
+                    <div class="rowContainer"><span class="sectionScoreStyle">0</span><span
+                            class="overallScoreStyle">/100</span>
+                        <div class="separatorForSectionScore"></div><span class="scoreDescriptionText">High
+                            Risk</span><canvas class="paddingBottom10" id="survivalAndStabilityGraph2" width="40px"
+                            height="40px"></canvas>
+                        <script
+                            type="text/javascript">let survivalAndStabilityGraphData = { "elementName1": "survivalAndStabilityGraph1", "elementName2": "survivalAndStabilityGraph2", "score": 0, "statusLabel": "High Risk", "color": "#DE350B" }</script>
+                        <script src="../public/javascripts/lineGraph.js"></script>
+                    </div>
+                </div>
+                <div class="sectionDividerLine" style="margin: 100px 0 30px;"></div>
+                <p class="sectionTextStyle">Stability and Survival of the Organisation is ability of the organisation to
+                    sustain through economic cycles & maintain steady revenue growth</p>
+                <div class="sectionDividerLine" style="margin-top: 30px;"></div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/financialElementsIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">DEMOGRAPHIC ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Business Vintage</td>
+                        <td class="tableDataStyle2">35</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Age of borrower</td>
+                        <td class="tableDataStyle2">60</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Ownership of property</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Succession plan</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">11</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="revenuePotential">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer">
+                    <div class="iconContainer"><img src="../public/images/keyIcon.svg" alt="succesship-logo"
+                            height="15px" width="15px"></div><span class="sectionTitle">Revenue Potential</span>
+                </div>
+                <div class="scoreCardContainer">
+                    <div class="rowContainer"><span class="sectionScoreStyle">0</span><span
+                            class="overallScoreStyle">/100</span>
+                        <div class="separatorForSectionScore"></div><span class="scoreDescriptionText">High
+                            Risk</span><canvas class="paddingBottom10" id="revenuePotentialGraph2" width="40px"
+                            height="40px"></canvas>
+                        <script
+                            type="text/javascript">let revenuePotentialGraphData = { "elementName1": "revenuePotentialGraph1", "elementName2": "revenuePotentialGraph2", "score": 0, "statusLabel": "High Risk", "color": "#DE350B" }</script>
+                        <script src="../public/javascripts/lineGraph.js"></script>
+                    </div>
+                </div>
+                <div class="sectionDividerLine" style="margin: 100px 0 30px;"></div>
+                <p class="sectionTextStyle">Revenue potential is the ability of the Revenue source to generate further
+                    incremental Revenues.</p>
+                <div class="sectionDividerLine" style="margin-top: 30px;"></div>
+            </div>
+            <div style="margin-left: 70px;"><a href="#homeScreen">
+                    <image src="../public/images/homeIcon.jpg" alt="home" height="15px" width="15px"></image>
+                </a></div>
+        </div>
+        <div class="rightSplit">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="tableTitleContainer" style="margin-top: 200px;"><img class="tableIconStyle"
+                        src="../public/images/growthGraphIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">REVENUE ELEMENT</span></div>
+                <div style="clear: both;"><canvas id="revenuePotentialGrowthGraph" width="300px"
+                        height="250px"></canvas></div>
+                <script
+                    type="text/javascript">let revenuePotentialYonYGraphData = [{ "score": "43.72", "label": "Turnover" }, { "score": "-9.20", "label": "Revenue to Expense ratio" }, { "score": "35.62", "label": "Debt free Return" }]</script>
+                <script src="../public/javascripts/lineGraph.js"></script>
+                <div class="tableTitleContainer" style="margin-top: 50px;"><img class="tableIconStyle"
+                        src="../public/images/financialElementsIcon.svg" alt="succesship-logo" height="15px"
+                        width="15px"><span class="companyFirmStyle">FINANCIAL ELEMENTS</span></div>
+                <table class="tableStyle">
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle2"> </td>
+                        <td class="tableDataStyle2">2021-22</td>
+                        <td class="tableDataStyle2">2022-23</td>
+                        <td class="tableDataStyle2">Growth</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Turnover</td>
+                        <td class="tableDataStyle2">₹9,53,47,031</td>
+                        <td class="tableDataStyle2">₹13,70,34,133</td>
+                        <td class="tableDataStyle2">43.72%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Revenue to Expense ratio</td>
+                        <td class="tableDataStyle2">8.26</td>
+                        <td class="tableDataStyle2">7.50</td>
+                        <td class="tableDataStyle2">-9.20%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Debt free Return</td>
+                        <td class="tableDataStyle2">₹20,74,963</td>
+                        <td class="tableDataStyle2">₹28,14,144</td>
+                        <td class="tableDataStyle2">35.62%</td>
+                    </tr>
+                    <tr class="tableRowStyle">
+                        <td class="tableDataStyle1">Loan Eligibility to Current Sales</td>
+                        <td class="tableDataStyle2">-</td>
+                        <td class="tableDataStyle2">1.36 %</td>
+                        <td class="tableDataStyle2">-</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">12</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="faq">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">FAQs</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">Questions? Look here.</span></div>
+                <div class="questionAnswerContainer" style="height: 340px;"><span class="questionText">Why is Success
+                        Score not reflecting the business appropriately?</span>
+                    <div class="answerList"><span class="answerText">Success Score is a first of its kind comprehensive
+                            culmination of universally accepted and followed rating and underwriting
+                            principles.</span><span class="answerText">The score is based on 6 broad components –
+                            Financial Management, Financial Standing, Access to Finance, Insurance Risk Management,
+                            Stability & Survival and Revenue Potential.</span><span class="answerText">It is AI & tech
+                            driven, dynamic and covers not only financial parameters but also non-financial parameters
+                            therefore giving a comprehensive score.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 340px;"><span
+                        class="questionText">What is DSCR? Why is it important?</span>
+                    <div class="answerList"><span class="answerText">DSCR is a critical parameter used by all financial
+                            agencies to quantify future loan perspectives, and liquidity position of businesses, it
+                            means Debt Service Coverage Ratio, in simple terms, it gauges No of times Profits generated
+                            in the year to debt serviced in that year, Eg, if firm has to pay up loans/EMI of Rs 1 Cr in
+                            the year, and profits generated is 2 Cr then DSCR is 2. DSCR > 1.25 is considered
+                            healthy.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">13</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">FAQs</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">Questions? Look here.</span></div>
+                <div class="questionAnswerContainer" style="height: 250px;"><span class="questionText">What is Quick
+                        Ratio? Why is it important?</span>
+                    <div class="answerList"><span class="answerText">Quick Ratio by formula is (Current Assets –
+                            Inventory)/Current Liabilities, “Current” by definition means ability to convert to cash
+                            within 1 year or lesser, the ratio reflects liquid working capital of any business, and a
+                            quick ratio >1 shows that any point of time the party has More Liquid assets (Inc. Market
+                            Credit) to meet off his current liabilities.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 156px; margin-top: 30px;"><span
+                        class="questionText">Why is insurance important in the financial assessment?</span>
+                    <div class="answerList"><span class="answerText">Insurance ensures that any future risks are secured
+                            and hence adds to the stability position for businesses for any future unforeseen
+                            events.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 164px;"><span
+                        class="questionText">How do I find the liquidity position of the business?</span>
+                    <div class="answerList"><span class="answerText">Critical parameters to assess the liquidity
+                            position of the dealer are – Current ratio, Quick Ratio, interest coverage ratio, Banking to
+                            TO and DSCR.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 224px;"><span
+                        class="questionText">What is Bureau Score? Why is it important?</span>
+                    <div class="answerList"><span class="answerText">Bureau score is nothing but a score assigned by
+                            external parties on the credit worthiness of parties. There are multiple agencies, all being
+                            authorized by RBI to carry out this assessment, CIBIL (the most popular) is one of them, a
+                            score > 750 is considered healthy and a score below 600 is considered risky.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">14</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">FAQs</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">Questions? Look here.</span></div>
+                <div class="questionAnswerContainer" style="height: 215px;"><span class="questionText">Why is CIBIL
+                        score not considered as Bureau Score in Success score calculations?</span>
+                    <div class="answerList"><span class="answerText">CIBIL is one of the many credit bureaus authorised
+                            for Bureau Score. CRIF is also an authorised Bureau. Import data is same for all Credit
+                            Bureaus and any bureau score is considered good.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">15</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer" id="glossary">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Glossary</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">A-C</span></div>
+                <div class="questionAnswerContainer" style="height: 120px;"><span class="questionText">%OD/CC
+                        utilization in last 6 months</span>
+                    <div class="answerList"><span class="answerText">Average percentage of OD/CC limit used by an OD/CC
+                            account holder in last 6 months</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 100px; margin-top: 30px;"><span
+                        class="questionText">Business Vintage</span>
+                    <div class="answerList"><span class="answerText">Vintage is how long your business has been in
+                            operation/existence.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 140px; margin-top: 30px;"><span
+                        class="questionText">Banking to TO</span>
+                    <div class="answerList"><span class="answerText">This ratio signifies the Cash collection strength
+                            of the party – in simple terms it is how much sales of the year was collected through the
+                            bank.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 120px;"><span
+                        class="questionText">Account Receivables</span>
+                    <div class="answerList"><span class="answerText">Accounts receivable is any money your customers owe
+                            you for goods or services they purchased from you in the past.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 140px;"><span
+                        class="questionText">Bureau Score</span>
+                    <div class="answerList"><span class="answerText">A Bureau Score is a credit score calculated only
+                            based on the loan repayment information held by a Credit Information Bureau/Agency.</span>
+                    </div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 100px;"><span
+                        class="questionText">Creditor Days</span>
+                    <div class="answerList"><span class="answerText">Creditor Days show the average number of days your
+                            business takes to pay suppliers.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">16</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Glossary</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">B-D</span></div>
+                <div class="questionAnswerContainer" style="height: 120px;"><span class="questionText">Business
+                        Vintage</span>
+                    <div class="answerList"><span class="answerText">Vintage is how long your business has been in
+                            operation/existence.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 140px; margin-top: 30px;"><span
+                        class="questionText">Current ratio</span>
+                    <div class="answerList"><span class="answerText">It reflects a company's ability to generate enough
+                            cash to pay off all its debts once they become due.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 140px; margin-top: 30px;"><span
+                        class="questionText">Debtor Days</span>
+                    <div class="answerList"><span class="answerText">Debtor days is the average number of days required
+                            for a company to receive payments from its customers after an invoice has been
+                            issued.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 120px;"><span
+                        class="questionText">Creditor Days</span>
+                    <div class="answerList"><span class="answerText">Creditor Days show the average number of days your
+                            business takes to pay suppliers.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 140px;"><span
+                        class="questionText">Debt to Equity Ratio</span>
+                    <div class="answerList"><span class="answerText">It is a measure of the degree to which a company is
+                            financing its operations through debt versus wholly-owned funds.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 140px;"><span
+                        class="questionText">DSCR</span>
+                    <div class="answerList"><span class="answerText">It is a measurement of a firm's available cash flow
+                            to pay current debt obligations and also to assess capability to borrow new
+                            debt/loans.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">17</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Glossary</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">E-K</span></div>
+                <div class="questionAnswerContainer" style="height: 170px;"><span class="questionText">EBITDA</span>
+                    <div class="answerList"><span class="answerText">Earnings Before Interest, Taxes, Depreciation, and
+                            Amortization(EBITDA) Is essentially net income (or earnings) with interest, taxes,
+                            depreciation, and amortization added back.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 130px; margin-top: 30px;"><span
+                        class="questionText">EMI bounces</span>
+                    <div class="answerList"><span class="answerText">Loan installment payments to financial institutions
+                            on loans borrowed not repaid on the due date. Technically classified as Default</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 130px; margin-top: 30px;"><span
+                        class="questionText">Interest Coverage Ratio</span>
+                    <div class="answerList"><span class="answerText">The Interest Coverage Ratio (ICR) is a financial
+                            ratio that is used to determine how well a company can pay the interest on its outstanding
+                            debts.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 170px;"><span
+                        class="questionText">EBITDA as % of total sales</span>
+                    <div class="answerList"><span class="answerText">The EBITDA margin is a financial metric used to
+                            assess a company's profitability by comparing its gross revenue with its earnings.</span>
+                    </div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 130px;"><span
+                        class="questionText">Gross Margin</span>
+                    <div class="answerList"><span class="answerText">Gross margin is the retailer's or manufacturer's
+                            profit before subtracting its selling, general and administrative, and interest
+                            expenses.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 100px; margin-top: 30px;"><span
+                        class="questionText">Keyman insurance</span>
+                    <div class="answerList"><span class="answerText">Insurance of the business owner.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">18</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Glossary</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">M-O</span></div>
+                <div class="questionAnswerContainer" style="height: 170px;"><span class="questionText">Max loan
+                        Eligibility</span>
+                    <div class="answerList"><span class="answerText">Eligible loan amount that a business can borrow
+                            based on the current financials</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 140px; margin-top: 30px;"><span
+                        class="questionText">Net Profit</span>
+                    <div class="answerList"><span class="answerText">Net profit is the measurement of a company's profit
+                            once operating costs, taxes, interest and depreciation have all been subtracted from its
+                            total revenues.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 120px;"><span
+                        class="questionText">No of OW Bounces</span>
+                    <div class="answerList"><span class="answerText">Outward cheque return means cheque deposited by
+                            you(Individual/business) has been returned unpaid for some reason.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 170px;"><span
+                        class="questionText">No of IW Bounces due to Insufficient funds</span>
+                    <div class="answerList"><span class="answerText">Inward cheque return means the cheque issued by you
+                            (Individual/business) has been returned unpaid by the banker specifically due to no
+                            funds/balance in your account.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 140px;"><span
+                        class="questionText">No of IW Bounces</span>
+                    <div class="answerList"><span class="answerText">Inward cheque return means the cheque issued by you
+                            (Individual/business) has been returned unpaid by the banker</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 120px;"><span
+                        class="questionText">OD limit</span>
+                    <div class="answerList"><span class="answerText">Overdraft limit is the money value permitted by the
+                            bank which can be withdrawn additionally over and above the credit balance.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">19</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Glossary</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">O-Q</span></div>
+                <div class="questionAnswerContainer" style="height: 140px;"><span class="questionText">Ownership of
+                        Property</span>
+                    <div class="answerList"><span class="answerText">Whether Residential/Business Property is owned or
+                            rented.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 160px; margin-top: 30px;"><span
+                        class="questionText">PBIT</span>
+                    <div class="answerList"><span class="answerText">PBIT is profit before interest and tax. PBIT
+                            measures an enterprise’s profitability by subtracting operating expenses from profit while
+                            excluding tax and interest costs.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 140px; margin-top: 30px;"><span
+                        class="questionText">Property in Transit Insurance</span>
+                    <div class="answerList"><span class="answerText">This insurance covers business goods or personal
+                            belongings while they're being moved from one place to another.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 140px;"><span
+                        class="questionText">PBIT as % of total sales</span>
+                    <div class="answerList"><span class="answerText">Comparison between PBIT and the company's
+                            earnings.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 160px;"><span
+                        class="questionText">Profit after Tax</span>
+                    <div class="answerList"><span class="answerText">Profit after-tax is the earnings of a business
+                            after all taxes and expenses have been deducted. It incorporates both operating income and
+                            income from other sources, such as interest income.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 140px;"><span
+                        class="questionText">Quick ratio</span>
+                    <div class="answerList"><span class="answerText">The quick ratio, also known as the acid-test ratio,
+                            is a liquidity ratio that measures an individual’s ability to pay for current liabilities
+                            and short-term expenses.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">20</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Glossary</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">R-T</span></div>
+                <div class="questionAnswerContainer" style="height: 140px;"><span class="questionText">Revenue to
+                        Expense ratio</span>
+                    <div class="answerList"><span class="answerText">Comparison between total expenses and total sales
+                            revenue of the company</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 170px; margin-top: 30px;"><span
+                        class="questionText">Total Liabilities</span>
+                    <div class="answerList"><span class="answerText">Total liabilities represents the combined debts and
+                            obligations that an individual or company owes. These may include Loans, Utility bills,
+                            monthly lease payments, Payroll expenses, Accounts Payable, Taxes etc.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="height: 165px; margin-top: 30px;"><span
+                        class="questionText">Total Assets</span>
+                    <div class="answerList"><span class="answerText">The total sum value of the items of value, a small
+                            business owns. Assets are items of economic value which are extended over time to yield
+                            benefit to the Owner.</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 140px;"><span
+                        class="questionText">Succession Plan</span>
+                    <div class="answerList"><span class="answerText">Succession planning is a process of identifying and
+                            developing new leaders/owners who can replace old leaders when they leave, retire or
+                            die.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 170px;"><span
+                        class="questionText">Total Income</span>
+                    <div class="answerList"><span class="answerText">Income from all sources including Salary, Income
+                            from house/property, Income from profession/business, capital gains and income from other
+                            sources. In other words, it is the income on which a person/company pays tax.</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 120px;"><span
+                        class="questionText">Turnover</span>
+                    <div class="answerList"><span class="answerText">It means how much a business makes in sales during
+                            a particular period.</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">21</span></div>
+        </div>
+    </div>
+    <div class="splitPageContainer">
+        <div class="leftSplit">
+            <div class="paddingLeft70">
+                <div class="ehrHeaderContainer"><span class="headerCompanyName">Sumit Enterprises</span><span
+                        class="ehrHeaderSeparator"></span><span class="ehrHeader">EHR</span></div>
+                <div class="mainTitleContainer"><span class="mainTitle">Glossary</span>
+                    <div class="mainTitleUnderline"></div>
+                </div>
+                <div style="margin: 30px 0px;"><span class="questionsTitle">T-W</span></div>
+                <div class="questionAnswerContainer" style="height: 130px;"><span class="questionText">Total
+                        Sales</span>
+                    <div class="answerList"><span class="answerText">It is the grand total of all sales revenues a
+                            business generates from everyday activities in a given period of time - in one Financial
+                            Year</span></div>
+                </div>
+                <div class="questionAnswerContainer" style="margin-top: 30px; height: 200px;"><span
+                        class="questionText">Written Off /settled Loans</span>
+                    <div class="answerList"><span class="answerText">When a borrower is not able to make payments
+                            against the outstanding loan/credit card amount for more than 180 days, the lender is
+                            required to 'write-off' the amount in question. Such loans are either written off or settled
+                            with payment of a negotiated amount</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="rightSplit" style="background: #ffffff !important;">
+            <div class="paddingLeft50">
+                <div class="headerActyvLogo"><img
+                        src="https://success-public-assets.s3.ap-south-1.amazonaws.com/platform-images/logos/succesship_logo.png"
+                        alt="succesship-logo"></div>
+                <div class="questionAnswerContainer" style="margin-top: 375px; height: 150px;"><span
+                        class="questionText">Total Loan outstanding</span>
+                    <div class="answerList"><span class="answerText">Sum of total principal as well as interest amount
+                            of a debt that is yet to be repaid</span></div>
+                </div>
+            </div>
+            <div class="pageNumberContainer"><span class="pageNumberStyle">22</span></div>
+        </div>
+    </div>
+</body>
